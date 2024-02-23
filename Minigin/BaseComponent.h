@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------
 
 #pragma once
+#include <string>
 
 //-----------------------------------------------------------------
 // Include Files
@@ -20,8 +21,7 @@ public:
 	//---------------------------
 
 
-	virtual ~BaseComponent();
-
+	virtual ~BaseComponent() =default;
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
@@ -33,7 +33,8 @@ public:
 	//---------------------------
 	// General Methods
 	//---------------------------
-
+	virtual void Update(float deltaTime) = 0;
+	virtual std::string GetName() const = 0;
 
 
 
@@ -41,6 +42,6 @@ private:
 	// -------------------------
 	// Datamembers
 	// -------------------------
-	BaseComponent();
+
 
 };
