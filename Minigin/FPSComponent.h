@@ -1,49 +1,42 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - BaseComponent.h - version v7_02			
+// C++ Header - FPSComponent.h		
 //-----------------------------------------------------------------
 
 #pragma once
-#include <string>
 
 
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-
-namespace dae
-{
-	class GameObject;
-}
-
+#include "BaseComponent.h"
 //-----------------------------------------------------------------
-// BaseComponent Class																
+// FPSComponent Class																
 //-----------------------------------------------------------------
-class BaseComponent 
+class FPSComponent : public BaseComponent
 {
 public:				
 	//---------------------------
 	// Constructor(s) and Destructor
 	//---------------------------
+	explicit FPSComponent(dae::GameObject& owner) : BaseComponent(owner){}
 
-	explicit BaseComponent(dae::GameObject& owner) : m_Owner(owner){}
+	~FPSComponent() override = default;
 
-	virtual ~BaseComponent() =default;
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
-	BaseComponent(const BaseComponent& other) = delete;
-	BaseComponent(BaseComponent&& other) noexcept = delete;
-	BaseComponent& operator=(const BaseComponent& other) = delete;
-	BaseComponent& operator=(BaseComponent&& other) noexcept = delete;
+	FPSComponent(const FPSComponent& other) = delete;
+	FPSComponent(FPSComponent&& other) noexcept = delete;
+	FPSComponent& operator=(const FPSComponent& other) = delete;
+	FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
 
 	//---------------------------
 	// General Methods
 	//---------------------------
-	virtual void Update(float deltaTime) = 0;
-	virtual std::string GetName() const = 0;
+	 void Update(float deltaTime) override;
+	 std::string GetName() const override;
 
-protected:
-	dae::GameObject& m_Owner;
+
 
 };
