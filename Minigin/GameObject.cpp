@@ -1,51 +1,93 @@
 #include <string>
+#include "BaseComponent.h"
 #include "GameObject.h"
+
+#include <iostream>
+
+#include "FPSComponent.h"
+#include "RenderComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include "BaseComponent.h"
+#include "TextComponent.h"
+#include "TextureComponent.h"
 
 
-dae::GameObject::~GameObject() = default;
+dae::GameObject::~GameObject()
+{
+	for(auto comp : m_Components)
+	{
+
+        delete comp;
+	}
+}
 
 void dae::GameObject::Update(float deltaTime)
 {
-	
+	for(auto comp : m_Components)
+	{
+        if (comp->GetName() == "FPSComponent")
+        {
+            dynamic_cast<FPSComponent*>(comp)->Update(deltaTime);
+        }
+        if(comp->GetName() == "TextComponent")
+        {
+            dynamic_cast<TextComponent*>(comp)->Update();
+        }
+	}
 }
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+    TextureComponent* textureComp = nullptr;
+    TransformComponent* transformComp = nullptr;
+
+    // Find TextureComponent and TransformComponent
+    for (auto comp : m_Components)
+    {
+        if (comp->GetName() == "TextureComponent")
+        {
+            textureComp = dynamic_cast<TextureComponent*>(comp);
+        }
+        else if (comp->GetName() == "TransformComponent")
+        {
+            transformComp = dynamic_cast<TransformComponent*>(comp);
+        }
+    }
+    // Check if both components are present
+    if (textureComp && transformComp)
+    {
+        // Render using RenderComponent (assuming RenderComponent is also present)
+       BaseComponent* renderComp = GetComponent("RenderComponent");
+       if (renderComp)
+       {
+           dynamic_cast<RenderComponent*>(renderComp)->Render(textureComp->GetTexture(), *transformComp);
+       }
+       else
+           std::cout << "render not found\n";
+    }
 }
 
-void dae::GameObject::SetTexture(const std::string& filename)
+void dae::GameObject::AddComponent(BaseComponent* component)
 {
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
-}
-
-void dae::GameObject::SetPosition(float x, float y)
-{
-	m_transform.SetPosition(x, y, 0.0f);
-}
-
-void dae::GameObject::AddComponent(std::unique_ptr<BaseComponent> component)
-{
-    m_Components.push_back(std::move(component));
+    m_Components.push_back(component);
 }
 
 void dae::GameObject::RemoveComponent(const std::string& componentName)
 {
-    m_Components.erase(std::remove_if(m_Components.begin(), m_Components.end(),
-        [&](const std::unique_ptr<BaseComponent>& comp) {
+    const auto newEnd = std::remove_if(m_Components.begin(), m_Components.end(),
+        [&](const BaseComponent* comp) {
             return comp->GetName() == componentName;
-        }), m_Components.end());
+        });
+
+    // Erase the removed elements from the vector
+    m_Components.erase(newEnd, m_Components.end());
 }
 
-BaseComponent* dae::GameObject::GetComponent(const std::string& componentName) const
+dae::BaseComponent* dae::GameObject::GetComponent(const std::string& componentName) const
 {
     for (const auto& comp : m_Components) {
         if (comp->GetName() == componentName) {
-            return comp.get();
+            return comp;
         }
     }
     return nullptr;

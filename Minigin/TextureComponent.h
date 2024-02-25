@@ -1,43 +1,48 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - FPSComponent.h		
+// C++ Header - TextureComponent.h	
 //-----------------------------------------------------------------
 
 #pragma once
+#include <memory>
 
+#include "BaseComponent.h"
+#include "Texture2D.h"
 
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-#include "BaseComponent.h"
+
 //-----------------------------------------------------------------
-// FPSComponent Class																
+// TextureComponent Class																
 //-----------------------------------------------------------------
-class FPSComponent : public dae::BaseComponent
+class TextureComponent : public dae::BaseComponent
 {
 public:				
 	//---------------------------
 	// Constructor(s) and Destructor
 	//---------------------------
-	explicit FPSComponent(dae::GameObject& owner) : BaseComponent(owner){}
+	TextureComponent(dae::GameObject& owner,const std::string filename);
 
-	~FPSComponent() override = default;
+	virtual ~TextureComponent() = default;
 
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
-	FPSComponent(const FPSComponent& other) = delete;
-	FPSComponent(FPSComponent&& other) noexcept = delete;
-	FPSComponent& operator=(const FPSComponent& other) = delete;
-	FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
+	TextureComponent(const TextureComponent& other) = delete;
+	TextureComponent(TextureComponent&& other) noexcept = delete;
+	TextureComponent& operator=(const TextureComponent& other) = delete;
+	TextureComponent& operator=(TextureComponent&& other) noexcept = delete;
 
 	//---------------------------
 	// General Methods
 	//---------------------------
-	 void Update(float deltaTime);
-	 std::string GetName() const override;
-	 float GetFps()const { return m_Fps; }
-private:
-	float m_Fps{};
 
+	std::string GetName() const override;
+	dae::Texture2D& GetTexture() const;
+private:
+	// -------------------------
+	// Datamembers
+	// -------------------------
+	std::shared_ptr<dae::Texture2D> m_Texture;
 };

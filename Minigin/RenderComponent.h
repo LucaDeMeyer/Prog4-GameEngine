@@ -1,43 +1,52 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - FPSComponent.h		
+// C++ Header - RenderComponent.h		
 //-----------------------------------------------------------------
 
 #pragma once
-
+#include "BaseComponent.h"
 
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-#include "BaseComponent.h"
+
+namespace dae
+{
+	class TransformComponent;
+	class Texture2D;
+}
+
 //-----------------------------------------------------------------
-// FPSComponent Class																
+// RenderComponentClass																
 //-----------------------------------------------------------------
-class FPSComponent : public dae::BaseComponent
+class RenderComponent :public dae::BaseComponent
 {
 public:				
 	//---------------------------
 	// Constructor(s) and Destructor
 	//---------------------------
-	explicit FPSComponent(dae::GameObject& owner) : BaseComponent(owner){}
+	RenderComponent(dae::GameObject& owner) : BaseComponent(owner){}
 
-	~FPSComponent() override = default;
+	~RenderComponent() override = default ;
 
 	//---------------------------
 	// Disabling copy/move constructors and assignment operators   
 	//---------------------------
-	FPSComponent(const FPSComponent& other) = delete;
-	FPSComponent(FPSComponent&& other) noexcept = delete;
-	FPSComponent& operator=(const FPSComponent& other) = delete;
-	FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
+	RenderComponent(const RenderComponent& other) = delete;
+	RenderComponent(RenderComponent&& other) noexcept = delete;
+	RenderComponent& operator=(const RenderComponent& other) = delete;
+	RenderComponent& operator=(RenderComponent&& other) noexcept = delete;
 
 	//---------------------------
 	// General Methods
 	//---------------------------
-	 void Update(float deltaTime);
-	 std::string GetName() const override;
-	 float GetFps()const { return m_Fps; }
+
+	void Render(const dae::Texture2D& texture, const dae::TransformComponent& transform) const;
+	std::string GetName() const override;
 private:
-	float m_Fps{};
+	// -------------------------
+	// Datamembers
+	// -------------------------
+
 
 };
