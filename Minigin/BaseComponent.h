@@ -26,7 +26,7 @@ namespace dae
 		// Constructor(s) and Destructor
 		//---------------------------
 
-		explicit BaseComponent(dae::GameObject& owner) : m_Owner(owner) {}
+		
 
 		virtual ~BaseComponent() = default;
 		//---------------------------
@@ -43,8 +43,18 @@ namespace dae
 		//virtual void Update(float deltaTime) = 0;
 		virtual std::string GetName() const = 0;
 
+		template <typename T>
+		T* GetComponent()
+		{
+			// Check if the dynamic cast is successful
+			return dynamic_cast<T*>(this);
+		}
 	protected:
-		dae::GameObject& m_Owner;
+		explicit BaseComponent(GameObject* owner) : m_Owner(owner) {}
+		GameObject* GetOwner() { return m_Owner; }
+		
+	private:
+		GameObject* m_Owner;
 
 	};
 }

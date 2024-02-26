@@ -13,31 +13,34 @@
 //-----------------------------------------------------------------
 // FPSComponent Class																
 //-----------------------------------------------------------------
-class FPSComponent : public dae::BaseComponent
+namespace dae
 {
-public:				
-	//---------------------------
-	// Constructor(s) and Destructor
-	//---------------------------
-	explicit FPSComponent(dae::GameObject& owner) : BaseComponent(owner){}
+	class FPSComponent : public BaseComponent
+	{
+	public:
+		//---------------------------
+		// Constructor(s) and Destructor
+		//---------------------------
+		explicit FPSComponent(GameObject* owner) : BaseComponent(owner) {}
 
-	~FPSComponent() override = default;
+		~FPSComponent() override = default;
 
-	//---------------------------
-	// Disabling copy/move constructors and assignment operators   
-	//---------------------------
-	FPSComponent(const FPSComponent& other) = delete;
-	FPSComponent(FPSComponent&& other) noexcept = delete;
-	FPSComponent& operator=(const FPSComponent& other) = delete;
-	FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
+		//---------------------------
+		// Disabling copy/move constructors and assignment operators   
+		//---------------------------
+		FPSComponent(const FPSComponent& other) = delete;
+		FPSComponent(FPSComponent&& other) noexcept = delete;
+		FPSComponent& operator=(const FPSComponent& other) = delete;
+		FPSComponent& operator=(FPSComponent&& other) noexcept = delete;
 
-	//---------------------------
-	// General Methods
-	//---------------------------
-	 void Update(float deltaTime);
-	 std::string GetName() const override;
-	 float GetFps()const { return m_Fps; }
-private:
-	float m_Fps{};
+		//---------------------------
+		// General Methods
+		//---------------------------
+		void Update(float deltaTime);
+		std::string GetName() const override;
+		float GetFps()const { return m_Fps; }
+	private:
+		float m_Fps{};
 
-};
+	};
+}

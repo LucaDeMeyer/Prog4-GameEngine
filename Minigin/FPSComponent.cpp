@@ -14,7 +14,7 @@
 // FPSComponent methods																				
 //-----------------------------------------------------------------
 
-void FPSComponent::Update(float deltaTime) {
+void dae::FPSComponent::Update(float deltaTime) {
     static float elapsedTime = 0.0f;
     static int frameCount = 0;
 
@@ -30,7 +30,7 @@ void FPSComponent::Update(float deltaTime) {
     }
 }
 
-std::string FPSComponent::GetName() const
+std::string dae::FPSComponent::GetName() const
 {
     return "FPSComponent";
 }

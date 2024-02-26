@@ -9,7 +9,6 @@ namespace dae
 	class Texture2D;
 	class BaseComponent;
 
-	// todo: this should become final.
 	class GameObject final
 	{
 	public:
@@ -26,14 +25,43 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 
-		//Component Managment
-
+		//Component managment
 		void AddComponent(BaseComponent* component);
-		void RemoveComponent(const std::string& componentName);
-		BaseComponent* GetComponent(const std::string& componentName) const;
-		bool HasComponent(const std::string& componentName) const;
+
+		template <typename T>
+		void RemoveComponent()
+		{
+			auto it = std::remove_if(m_Components.begin(), m_Components.end(),
+				[typeidT = &typeid(T)](BaseComponent* component)
+				{
+					return typeid(*component) == *typeidT;
+				});
+
+			m_Components.erase(it, m_Components.end());
+		}
 
 		
+		template <typename T>
+		bool HasComponent() const
+		{
+			return GetComponent<T>() != nullptr;
+		}
+
+		template <typename T>
+		T* GetComponent() const
+		{
+			for (BaseComponent* component : m_Components)
+			{
+				// Check if the dynamic cast is successful
+				T* derivedComponent = dynamic_cast<T*>(component);
+				if (derivedComponent != nullptr)
+				{
+					return derivedComponent;
+				}
+			}
+			return nullptr;
+		}
+
 	private:
 		std::vector<BaseComponent*> m_Components;
 
