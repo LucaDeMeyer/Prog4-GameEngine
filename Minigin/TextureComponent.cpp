@@ -16,19 +16,30 @@
 // TextureComponent methods																				
 //-----------------------------------------------------------------
 
-dae::TextureComponent::TextureComponent(dae::GameObject* owner, std::string filename) : BaseComponent(owner)
+dae::TextureComponent::TextureComponent(dae::GameObject* owner,const std::string& filename) : BaseComponent(owner)
 
-	{
-		m_Texture = dae::ResourceManager::GetInstance().LoadTexture(filename);
-	}
+{
+	m_Texture = dae::ResourceManager::GetInstance().LoadTexture(filename);
+}
 
-	std::string dae::TextureComponent::GetName() const
-	{
+std::string dae::TextureComponent::GetName() const
+{
 		return "Texture Component";
-	}
+}
 
 dae::Texture2D& dae::TextureComponent::GetTexture() const
-	{
-		return *m_Texture;
-	}
+{
+	return *m_Texture;
+}
+
+void dae::TextureComponent::SetTexture(std::shared_ptr<Texture2D> newTexture)
+{
+	m_Texture = newTexture;
+}
+
+void dae::TextureComponent::Update(float)
+{
+
+}
+
 

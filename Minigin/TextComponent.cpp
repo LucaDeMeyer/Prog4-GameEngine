@@ -4,12 +4,21 @@
 #include "Renderer.h"
 #include "Font.h"
 #include "Texture2D.h"
+#include "TextureComponent.h"
 
-dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font,GameObject* owner) 
-	:BaseComponent(owner) ,m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr)
-{ }
+dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font,GameObject* owner, TextureComponent* textureComp)
+	:BaseComponent(owner) ,m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_TextureComp(textureComp)
+{
 
-void dae::TextComponent::Update()
+
+	const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
+	const auto surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
+	auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surf);
+	SDL_FreeSurface(surf);
+	m_TextureComp->SetTexture(std::make_shared<Texture2D>(texture));
+}
+
+void dae::TextComponent::Update(float)
 {
 	if (m_needsUpdate)
 	{
@@ -25,7 +34,7 @@ void dae::TextComponent::Update()
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		m_textTexture = std::make_shared<Texture2D>(texture);
+		m_TextureComp->SetTexture(std::make_shared<Texture2D>(texture));
 		m_needsUpdate = false;
 	}
 }

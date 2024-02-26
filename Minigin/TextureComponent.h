@@ -26,9 +26,9 @@ namespace dae
 		//---------------------------
 		// Constructor(s) and Destructor
 		//---------------------------
-		TextureComponent(GameObject* owner, const std::string filename);
+		TextureComponent(GameObject* owner, const std::string& filename);
 
-		virtual ~TextureComponent() = default;
+		~TextureComponent() override = default;
 
 		//---------------------------
 		// Disabling copy/move constructors and assignment operators   
@@ -41,9 +41,10 @@ namespace dae
 		//---------------------------
 		// General Methods
 		//---------------------------
-
+		void Update(float deltaTime) override;
 		std::string GetName() const override;
 		dae::Texture2D& GetTexture() const;
+		void SetTexture(std::shared_ptr<Texture2D> newTexture);
 	private:
 		// -------------------------
 		// Datamembers

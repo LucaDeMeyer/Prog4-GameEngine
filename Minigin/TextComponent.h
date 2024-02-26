@@ -7,6 +7,10 @@
 #include "GameObject.h"
 #include "TransformComponent.h"
 
+namespace dae
+{
+	class TextureComponent;
+}
 
 namespace dae
 {
@@ -17,14 +21,14 @@ namespace dae
 	public:
 		
 
-		TextComponent(const std::string& text, std::shared_ptr<Font> font,GameObject* owner);
-		virtual ~TextComponent() = default;
+		TextComponent(const std::string& text, std::shared_ptr<Font> font,GameObject* owner,TextureComponent* textureComp);~TextComponent() override = default;
+
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
 		TextComponent& operator=(const TextComponent& other) = delete;
 		TextComponent& operator=(TextComponent&& other) = delete;
 
-		void Update();
+		void Update(float deltaTime) override;
 		void SetText(const std::string& text);
 
 		std::string GetName() const override;
@@ -32,6 +36,6 @@ namespace dae
 		bool m_needsUpdate;
 		std::string m_text;
 		std::shared_ptr<Font> m_font;
-		std::shared_ptr<Texture2D> m_textTexture;
+		TextureComponent* m_TextureComp;
 	};
 }

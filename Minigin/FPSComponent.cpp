@@ -22,8 +22,8 @@ void dae::FPSComponent::Update(float deltaTime) {
     frameCount++;
 
     if (elapsedTime >= 1.0f) {
-        float fps = static_cast<float>(frameCount) / elapsedTime;
-        std::cout << "FPS: " << fps << std::endl;
+        m_Fps = static_cast<float>(frameCount) / elapsedTime;
+        std::cout << "FPS: " << m_Fps << std::endl;
 
         elapsedTime = 0.0f;
         frameCount = 0;

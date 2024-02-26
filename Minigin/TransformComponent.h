@@ -18,6 +18,8 @@ namespace dae
 
 		const glm::vec3& GetPosition() const { return m_position; }
 		void SetPosition(float x, float y, float z);
+
+		void Update(float deltaTime) override;
 		std::string GetName() const override;
 	private:
 		glm::vec3 m_position;

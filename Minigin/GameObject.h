@@ -15,7 +15,7 @@ namespace dae
 		 void Update(float deltaTime);
 		 void Render() const;
 
-		void SetPosition(float x, float y);
+		
 
 		GameObject() = default;
 		~GameObject();

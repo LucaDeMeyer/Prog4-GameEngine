@@ -7,6 +7,11 @@ void dae::TransformComponent::SetPosition(const float x, const float y, const fl
 	m_position.z = z;
 }
 
+void dae::TransformComponent::Update(float)
+{
+
+}
+
 std::string dae::TransformComponent::GetName() const
 {
 	return "TransformComponent";

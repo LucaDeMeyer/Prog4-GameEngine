@@ -23,14 +23,18 @@ dae::GameObject::~GameObject()
 
 void dae::GameObject::Update(float deltaTime)
 {
-    //can only update component directly-> impliment update in basecomp -> pure virtual/ virtual
-    GetComponent<FPSComponent>()->Update(deltaTime);
-    GetComponent<TextComponent>()->Update();
+    for(auto comp : m_Components)
+    {
+        comp->Update(deltaTime);
+    }
+   
 
 }
 
 void dae::GameObject::Render() const
 {
+    //expensive -> should add datamembers that get set at creation
+    if(HasComponent<TextureComponent>() && HasComponent<RenderComponent>() && HasComponent<TransformComponent>())
     GetComponent<RenderComponent>()->Render(GetComponent<TextureComponent>()->GetTexture(), *GetComponent<TransformComponent>());
 }
 
