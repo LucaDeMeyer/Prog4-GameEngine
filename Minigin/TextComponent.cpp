@@ -6,11 +6,9 @@
 #include "Texture2D.h"
 #include "TextureComponent.h"
 
-dae::TextComponent::TextComponent(const std::string& text, std::shared_ptr<Font> font,GameObject* owner, TextureComponent* textureComp)
+dae::TextComponent::TextComponent(const std::string& text , std::shared_ptr<Font> font,GameObject* owner, TextureComponent* textureComp)
 	:BaseComponent(owner) ,m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_TextureComp(textureComp)
 {
-
-
 	const SDL_Color color = { 255,255,255,255 }; // only white text is supported now
 	const auto surf = TTF_RenderText_Blended(m_font->GetFont(), m_text.c_str(), color);
 	auto texture = SDL_CreateTextureFromSurface(Renderer::GetInstance().GetSDLRenderer(), surf);

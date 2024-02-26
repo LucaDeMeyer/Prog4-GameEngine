@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "TextComponent.h"
+
 //-----------------------------------------------------------------
 // FPSComponent methods																				
 //-----------------------------------------------------------------
@@ -24,7 +26,8 @@ void dae::FPSComponent::Update(float deltaTime) {
     if (elapsedTime >= 1.0f) {
         m_Fps = static_cast<float>(frameCount) / elapsedTime;
         std::cout << "FPS: " << m_Fps << std::endl;
-
+        if(text!=nullptr)
+        text->SetText(std::to_string(m_Fps));
         elapsedTime = 0.0f;
         frameCount = 0;
     }
