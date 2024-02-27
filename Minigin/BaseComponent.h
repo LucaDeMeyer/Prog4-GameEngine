@@ -52,7 +52,7 @@ namespace dae
 		}
 	protected:
 		explicit BaseComponent(GameObject* owner) : m_Owner(owner) {}
-		GameObject* GetOwner() { return m_Owner; }
+		GameObject* GetOwner() const { return m_Owner; }
 		
 	private:
 		GameObject* m_Owner;

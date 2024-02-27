@@ -9,6 +9,8 @@
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
+#include <iostream>
+
 #include "BaseComponent.h"
 #include "GameObject.h"
 
@@ -25,10 +27,7 @@ namespace dae
 		// Constructor(s) and Destructor
 		//---------------------------
 		explicit FPSComponent(GameObject* owner) : BaseComponent(owner)
-		{
-			if(owner->HasComponent<TextComponent>())
-			text = owner->GetComponent<TextComponent>();
-		}
+		{}
 
 		~FPSComponent() override = default;
 
@@ -45,10 +44,10 @@ namespace dae
 		//---------------------------
 		void Update(float deltaTime) override;
 		std::string GetName() const override;
-		float GetFps()& { return m_Fps; }
+		float GetFps()const { return m_Fps; }
 	private:
 		float m_Fps{};
-		TextComponent* text;
+		TextComponent* m_TextComp{nullptr};
 
 	};
 }

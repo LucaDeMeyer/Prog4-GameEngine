@@ -8,8 +8,9 @@
 //-----------------------------------------------------------------
 #include "FPSComponent.h"																				
 
+#include <iomanip>
 #include <iostream>
-
+#include<sstream>
 #include "TextComponent.h"
 
 //-----------------------------------------------------------------
@@ -17,6 +18,9 @@
 //-----------------------------------------------------------------
 
 void dae::FPSComponent::Update(float deltaTime) {
+
+    if(m_TextComp == nullptr)
+		m_TextComp = GetOwner()->GetComponent<TextComponent>();
     static float elapsedTime = 0.0f;
     static int frameCount = 0;
 
@@ -25,9 +29,10 @@ void dae::FPSComponent::Update(float deltaTime) {
 
     if (elapsedTime >= 1.0f) {
         m_Fps = static_cast<float>(frameCount) / elapsedTime;
-        std::cout << "FPS: " << m_Fps << std::endl;
-        if(text!=nullptr)
-        text->SetText(std::to_string(m_Fps));
+        std::stringstream text;
+        text << std::fixed << std::setprecision(1) << std::to_string(m_Fps * 10)  << "FPS";
+        if(m_TextComp!=nullptr)
+        m_TextComp->SetText(text.str());
         elapsedTime = 0.0f;
         frameCount = 0;
     }
