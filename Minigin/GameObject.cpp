@@ -43,3 +43,46 @@ void dae::GameObject::AddComponent(BaseComponent* component)
     m_Components.emplace_back(component);
 }
 
+
+void dae::GameObject::SetParent(dae::GameObject* parent, bool keepWorldPosition)
+{
+    if (IsChild(parent) || parent == this || m_Parent == parent)
+        return;
+    if (parent == nullptr)
+        SetLocalPosition(GetWorldPosition());
+    else
+    {
+        if (keepWorldPosition)
+            SetLocalPosition(GetLocalPosition() - parent->GetWorldPosition());
+        SetPositionDirty()
+    }
+    if (m_Parent) m_Parent->RemoveChild(this);
+    m_Parent = parent;
+    if (m_Parent) m_Parent->AddChild(this)
+}
+void dae::GameObject::SetLocalPosition(const glm::vec3 newLocalPos)
+{
+    m_LocalPosition = newLocalPos;
+    SetPositionDirty();
+}
+
+
+const glm::vec3& dae::GameObject::GetWorldPosition() 
+{
+    if (m_PositionIsDirty)
+        UpdateWorldPosition();
+    return m_WorldPosition;
+}
+
+
+void dae::GameObject::UpdateWorldPosition()
+{
+    if (m_PositionIsDirty)
+    {
+        if (m_Parent == nullptr)
+            m_WorldPosition = m_LocalPosition;
+        else
+            m_WorldPosition = m_Parent->GetWorldPosition() + m_LocalPosition;
+    }
+    m_PositionIsDirty = false;
+}

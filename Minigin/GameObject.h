@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <glm/vec3.hpp>
 
 
 namespace dae
@@ -62,8 +63,23 @@ namespace dae
 			return nullptr;
 		}
 
+		//SceneGraph
+		void SetParent(GameObject* parent, bool keepWorldPosition);
+		void SetLocalPosition(const glm::vec3 newLocalPos);
+		void SetWorldPosition(glm::vec3 newWorldpos);
+		
+		const glm::vec3& GetLocalPosition() const { return m_LocalPosition; }
+		const glm::vec3& GetWorldPosition();
+
+		void UpdateWorldPosition();
+		bool SetPositionDirty() { return m_PositionIsDirty = true; }
 	private:
 		std::vector<BaseComponent*> m_Components;
+		std::vector<GameObject*> m_Childeren;
+		GameObject* m_Parent				{nullptr};
+		bool m_PositionIsDirty{};
 
+		glm::vec3 m_LocalPosition;
+		glm::vec3 m_WorldPosition;
 	};
 }

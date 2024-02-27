@@ -18,7 +18,7 @@
 
 void dae::RenderComponent::Render(const dae::Texture2D& texture, const dae::TransformComponent& transform) const
 {
-	const auto& pos = transform.GetLocalPosition();
+	const auto& pos = transform.GetPosition();
 	dae::Renderer::GetInstance().RenderTexture(texture, pos.x, pos.y);
 }
 
