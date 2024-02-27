@@ -16,13 +16,18 @@ namespace dae
 		TransformComponent& operator=(const TransformComponent& other) = delete;
 		TransformComponent& operator=(TransformComponent&& other) noexcept = delete;
 
-		const glm::vec3& GetPosition() const{ return m_Position; }
+		const glm::vec3& GetLocalPosition() const{ return m_LocalPosition; }
+		const glm::vec3& GetWorldPosition() const { return m_WorldPosition; }
+
+		void SetLocalPosition(glm::vec3 newpos) { m_LocalPosition = newpos; }
+
 		void SetPosition(float x, float y, float z);
 
 		void Update(float deltaTime) override;
 		std::string GetName() const override;
 	private:
-		glm::vec3 m_Position{};
+		glm::vec3 m_LocalPosition{};
+		glm::vec3 m_WorldPosition{};
 		
 	};
 }

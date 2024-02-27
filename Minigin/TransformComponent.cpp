@@ -2,9 +2,9 @@
 
 void dae::TransformComponent::SetPosition(const float x, const float y, const float z)
 {
-	m_Position.x = x;
-	m_Position.y = y;
-	m_Position.z = z;
+	m_LocalPosition.x = x;
+	m_LocalPosition.y = y;
+	m_LocalPosition.z = z;
 }
 
 void dae::TransformComponent::Update(float)
