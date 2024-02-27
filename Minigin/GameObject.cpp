@@ -1,24 +1,45 @@
 #include <string>
+#include "BaseComponent.h"
 #include "GameObject.h"
+
+#include <iostream>
+
+#include "FPSComponent.h"
+#include "RenderComponent.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+#include "TextComponent.h"
+#include "TextureComponent.h"
 
-dae::GameObject::~GameObject() = default;
 
-void dae::GameObject::Update(){}
+dae::GameObject::~GameObject()
+{
+	for(auto comp : m_Components)
+	{
+
+        delete comp;
+	}
+}
+
+void dae::GameObject::Update(float deltaTime)
+{
+    for(auto comp : m_Components)
+    {
+        comp->Update(deltaTime);
+    }
+   
+
+}
 
 void dae::GameObject::Render() const
 {
-	const auto& pos = m_transform.GetPosition();
-	Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+    //expensive -> should add datamembers that get set at creation
+    if(HasComponent<TextureComponent>() && HasComponent<RenderComponent>() && HasComponent<TransformComponent>())
+    GetComponent<RenderComponent>()->Render(GetComponent<TextureComponent>()->GetTexture(), *GetComponent<TransformComponent>());
 }
 
-void dae::GameObject::SetTexture(const std::string& filename)
+void dae::GameObject::AddComponent(BaseComponent* component)
 {
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+    m_Components.emplace_back(component);
 }
 
-void dae::GameObject::SetPosition(float x, float y)
-{
-	m_transform.SetPosition(x, y, 0.0f);
-}
