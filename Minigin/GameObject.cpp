@@ -27,7 +27,6 @@ void dae::GameObject::Update(float deltaTime)
     {
         comp->Update(deltaTime);
     }
-   
 
 }
 
@@ -46,15 +45,18 @@ void dae::GameObject::AddComponent(BaseComponent* component)
 
 void dae::GameObject::SetParent(dae::GameObject* parent, bool keepWorldPosition)
 {
+    if (m_Transform == nullptr)
+        m_Transform = GetComponent<TransformComponent>();
+
     if (IsChild(parent) || parent == this || m_Parent == parent)
         return;
     if (parent == nullptr)
-        SetLocalPosition(GetWorldPosition());
+        m_Transform->SetLocalPosition(m_Transform->GetWorldPosition());
     else
     {
         if (keepWorldPosition)
-            SetLocalPosition(GetLocalPosition() - parent->GetWorldPosition());
-        SetPositionDirty();
+            m_Transform->SetLocalPosition(m_Transform->GetLocalPosition() - parent->m_Transform->GetWorldPosition());
+        m_Transform->SetPositionDirty();
     }
     if (m_Parent) m_Parent->RemoveChild(this);
     m_Parent = parent;
@@ -84,36 +86,4 @@ bool dae::GameObject::IsChild(const GameObject* parent)
 
     return true;
 
-}
-
-void dae::GameObject::SetLocalPosition(const glm::vec3& newLocalPos)
-{
-    GetComponent<TransformComponent>()->SetLocalPosition(newLocalPos);
-    SetPositionDirty();
-}
-
-void dae::GameObject::SetWorldPosition(const glm::vec3& newWorldpos)
-{
-
-}
-
-
-const glm::vec3& dae::GameObject::GetWorldPosition() 
-{
-    if (m_PositionIsDirty)
-        UpdateWorldPosition();
-    return m_WorldPosition;
-}
-
-
-void dae::GameObject::UpdateWorldPosition()
-{
-    if (m_PositionIsDirty)
-    {
-        if (m_Parent == nullptr)
-            m_WorldPosition = m_LocalPosition;
-        else
-            m_WorldPosition = m_Parent->GetWorldPosition() + m_LocalPosition;
-    }
-    m_PositionIsDirty = false;
 }

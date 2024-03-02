@@ -3,6 +3,8 @@
 #include <vector>
 #include <glm/vec3.hpp>
 
+#include "TransformComponent.h"
+
 
 namespace dae
 {
@@ -26,7 +28,7 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 
-		//Component managment
+		//Component management
 		void AddComponent(BaseComponent* component);
 
 		template <typename T>
@@ -65,7 +67,7 @@ namespace dae
 
 		//SceneGraph
 		void SetParent(GameObject* parent, bool keepWorldPosition);
-		void RemoveChild(GameObject* parent);
+		void RemoveChild(GameObject* child);
 		void AddChild(GameObject* child);
 
 		GameObject* GetChildAtIndex(int index) const { return m_Children[index]; }
@@ -73,22 +75,18 @@ namespace dae
 
 		bool IsChild(const GameObject* parent);
 
-		void SetLocalPosition(const glm::vec3& newLocalPos);
-		void SetWorldPosition(const glm::vec3& newWorldpos);
-		
-		const glm::vec3& GetLocalPosition() const { return m_LocalPosition; }
-		const glm::vec3& GetWorldPosition();
-
-		void UpdateWorldPosition();
-		bool SetPositionDirty() { return m_PositionIsDirty = true; }
+		const GameObject* GetParent() const { return m_Parent; }
 
 	private:
+
 		std::vector<BaseComponent*> m_Components;
+
 		std::vector<GameObject*> m_Children;
 		GameObject* m_Parent				{nullptr};
-		bool m_PositionIsDirty{};
 
 		glm::vec3 m_LocalPosition;
 		glm::vec3 m_WorldPosition;
+
+		TransformComponent* m_Transform;
 	};
 }
