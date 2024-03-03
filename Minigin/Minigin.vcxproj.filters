@@ -69,6 +69,9 @@
     <ClInclude Include="TransformComponent.h">
       <Filter>Header Files\CompHeader</Filter>
     </ClInclude>
+    <ClInclude Include="RotationComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="TransformComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RotationComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

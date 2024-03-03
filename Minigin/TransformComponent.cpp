@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "TextComponent.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 const glm::vec3& dae::TransformComponent::GetWorldPosition()
 {
@@ -17,7 +18,7 @@ void dae::TransformComponent::UpdateWorldPosition()
 		if (GetOwner()->GetParent() == nullptr)
 			m_WorldPosition = m_LocalPosition;
 		else
-			m_WorldPosition = GetWorldPosition() + m_LocalPosition;
+			m_WorldPosition = GetOwner()->GetParent()->GetComponent<TransformComponent>()->m_WorldPosition + m_LocalPosition;
 	}
 	m_PositionIsDirty = false;
 }
@@ -43,14 +44,16 @@ void dae::TransformComponent::SetPosition(const float x, const float y, const fl
 	m_LocalPosition.x = x;
 	m_LocalPosition.y = y;
 	m_LocalPosition.z = z;
+
+	m_WorldPosition = m_LocalPosition;
 }
 
 void dae::TransformComponent::Update(float)
 {
-
+	if(m_RotationComponent)
+	{
+		const float rotation = m_RotationComponent->GetRotationAngle();
+		glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+	}
 }
 
-std::string dae::TransformComponent::GetName() const
-{
-	return "TransformComponent";
-}
