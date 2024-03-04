@@ -70,7 +70,7 @@
       <Filter>Header Files\CompHeader</Filter>
     </ClInclude>
     <ClInclude Include="RotationComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\CompHeader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +123,7 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="RotationComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

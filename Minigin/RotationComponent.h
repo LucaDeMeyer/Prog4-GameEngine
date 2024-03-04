@@ -1,42 +1,51 @@
 //-----------------------------------------------------------------
 // Main Game  File
-// C++ Header - X.h - version v7_02			
+// C++ Header - RotationComponent.h		
 //-----------------------------------------------------------------
 
 #pragma once
+#include "BaseComponent.h"
 
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-
-//-----------------------------------------------------------------
-// X Class																
-//-----------------------------------------------------------------
-class X 
+namespace dae
 {
-public:				
-	//---------------------------
-	// Constructor(s) and Destructor
-	//---------------------------
-	X();
-
-	virtual ~X();
-
-	//---------------------------
-	// Disabling copy/move constructors and assignment operators   
-	//---------------------------
-	X(const X& other) = delete;
-	X(X&& other) noexcept = delete;
-	X& operator=(const X& other) = delete;
-	X& operator=(X&& other) noexcept = delete;
-
-	//---------------------------
-	// General Methods
-	//---------------------------
-private:
-	// -------------------------
-	// Datamembers
-	// -------------------------
 
 
-};
+	//-----------------------------------------------------------------
+	// RotationComponentClass																
+	//-----------------------------------------------------------------
+	class RotationComponent : public BaseComponent
+	{
+	public:
+		//---------------------------
+		// Constructor(s) and Destructor
+		//---------------------------
+		RotationComponent(GameObject* owner,const float angle = 0) : BaseComponent(owner) , m_RotationAngle(angle){}
+
+		~RotationComponent() override = default;
+
+		//---------------------------
+		// Disabling copy/move constructors and assignment operators   
+		//---------------------------
+		RotationComponent(const RotationComponent& other)					= delete;
+		RotationComponent(RotationComponent&& other) noexcept				= delete;
+		RotationComponent& operator=(const RotationComponent& other)		= delete;
+		RotationComponent& operator=(RotationComponent&& other) noexcept	= delete;
+
+		//---------------------------
+		// General Methods
+		//---------------------------
+
+		void Update(float deltaTime) override;
+
+		float GetRotationAngle() const { return m_RotationAngle; }
+	private:
+		// -------------------------
+		// Datamembers
+		// -------------------------
+		float m_RotationAngle;
+
+	};
+}

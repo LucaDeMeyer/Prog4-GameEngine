@@ -31,7 +31,7 @@ namespace dae
 		void Update(float deltaTime) override;
 		void SetText(const std::string& text);
 
-		std::string GetName() const override;
+		
 	private:
 		bool m_needsUpdate;
 		std::string m_text;

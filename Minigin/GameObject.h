@@ -3,7 +3,7 @@
 #include <vector>
 #include <glm/vec3.hpp>
 
-#include "TransformComponent.h"
+
 
 
 namespace dae
@@ -11,6 +11,7 @@ namespace dae
 
 	class Texture2D;
 	class BaseComponent;
+	class TransformComponent;
 
 	class GameObject final
 	{

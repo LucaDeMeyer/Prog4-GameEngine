@@ -18,10 +18,7 @@
 
 
 
-std::string dae::TextureComponent::GetName() const
-{
-		return "Texture Component";
-}
+
 
 dae::Texture2D& dae::TextureComponent::GetTexture() const
 {

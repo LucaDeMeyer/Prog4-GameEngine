@@ -10,6 +10,7 @@
 #include "Renderer.h"
 #include "TextComponent.h"
 #include "TextureComponent.h"
+#include "TransformComponent.h"
 
 
 dae::GameObject::~GameObject()

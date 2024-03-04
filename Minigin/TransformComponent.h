@@ -2,13 +2,24 @@
 #include <glm/glm.hpp>
 
 #include "BaseComponent.h"
+#include "GameObject.h"
+#include "RotationComponent.h"
 
 namespace dae
 {
 	class TransformComponent : public BaseComponent
 	{
 	public:
-		TransformComponent(GameObject* owner) : BaseComponent(owner){}
+		TransformComponent(GameObject* owner) : BaseComponent(owner)
+		{
+			if (owner->HasComponent<RotationComponent>())
+			{
+				m_RotationComponent = owner->GetComponent<RotationComponent>();
+			}
+			else
+				m_RotationComponent = nullptr;
+
+		}
 		~TransformComponent() override = default;
 
 		TransformComponent(const TransformComponent& other) = delete;
@@ -27,12 +38,14 @@ namespace dae
 		bool SetPositionDirty() { return m_PositionIsDirty = true; }
 
 		void Update(float deltaTime) override;
-		std::string GetName() const override;
+		
 
 	private:
 		glm::vec3 m_LocalPosition{};
 		glm::vec3 m_WorldPosition{};
 		bool m_PositionIsDirty{};
+		RotationComponent* m_RotationComponent;
+
 		
 	};
 }

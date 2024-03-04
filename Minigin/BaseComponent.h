@@ -42,8 +42,6 @@ namespace dae
 		//---------------------------
 		virtual void Update(float deltaTime) = 0;
 
-		virtual std::string GetName() const = 0;
-
 		template <typename T>
 		T* GetComponent()
 		{

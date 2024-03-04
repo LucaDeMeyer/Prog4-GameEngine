@@ -26,8 +26,3 @@ void dae::RenderComponent::Update(float )
 {
 	
 }
-
-std::string dae::RenderComponent::GetName() const
-{
-	return "RenderComponent";
-}

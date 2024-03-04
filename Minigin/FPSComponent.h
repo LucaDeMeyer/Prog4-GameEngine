@@ -43,7 +43,7 @@ namespace dae
 		// General Methods
 		//---------------------------
 		void Update(float deltaTime) override;
-		std::string GetName() const override;
+	
 		float GetFps()const { return m_Fps; }
 	private:
 		float m_Fps{};
