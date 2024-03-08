@@ -19,6 +19,12 @@
     <Filter Include="Header Files\CompHeader">
       <UniqueIdentifier>{8b71d376-b359-44bc-9e5e-e6d336c3c6f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ImGui">
+      <UniqueIdentifier>{af0dc07a-f1b4-4afa-b4a9-ab0ba8fcfe52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImGui">
+      <UniqueIdentifier>{30572b99-8db0-4572-a8f6-8e94ea4becd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -72,6 +78,33 @@
     <ClInclude Include="RotationComponent.h">
       <Filter>Header Files\CompHeader</Filter>
     </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imconfig.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui_internal.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imstb_rectpack.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imstb_textedit.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imstb_truetype.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\backends\imgui_impl_opengl3.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\backends\imgui_impl_opengl3_loader.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\backends\imgui_impl_sdl2.h">
+      <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -124,6 +157,27 @@
     </ClCompile>
     <ClCompile Include="RotationComponent.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui_demo.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui_draw.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui_tables.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\imgui_widgets.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\backends\imgui_impl_sdl2.cpp">
+      <Filter>Source Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui-1.90.4\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

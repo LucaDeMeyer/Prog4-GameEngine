@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "SceneManager.h"
 #include "Texture2D.h"
+#include "../3rdParty/imgui-1.90.4/imgui-1.90.4/imgui.h"
+#include"../imgui-1.90.4/imgui-1.90.4/backends/imgui_impl_opengl3.h"
+#include "D:\DAE\Year 2\Prog4\Prog4-Main\Prog4-GameEngine\3rdParty\imgui-1.90.4\imgui-1.90.4\backends/imgui_impl_sdl2.h"
 
 int GetOpenGLDriverIndex()
 {
@@ -25,6 +28,11 @@ void dae::Renderer::Init(SDL_Window* window)
 	{
 		throw std::runtime_error(std::string("SDL_CreateRenderer Error: ") + SDL_GetError());
 	}
+
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGui_ImplSDL2_InitForOpenGL(window,SDL_GL_GetCurrentContext());
+	ImGui_ImplOpenGL3_Init();
 }
 
 void dae::Renderer::Render() const

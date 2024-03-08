@@ -68,8 +68,7 @@ namespace dae
 
 		//SceneGraph
 		void SetParent(GameObject* parent, bool keepWorldPosition);
-		void RemoveChild(GameObject* child);
-		void AddChild(GameObject* child);
+		
 
 		GameObject* GetChildAtIndex(int index) const { return m_Children[index]; }
 		size_t GetChildCount() const { return m_Children.size(); }
@@ -83,11 +82,16 @@ namespace dae
 		std::vector<BaseComponent*> m_Components;
 
 		std::vector<GameObject*> m_Children;
-		GameObject* m_Parent				{nullptr};
+		GameObject* m_Parent{nullptr};
 
 		glm::vec3 m_LocalPosition;
 		glm::vec3 m_WorldPosition;
 
 		TransformComponent* m_Transform;
+
+
+		void RemoveChild(GameObject* child);
+		void AddChild(GameObject* child);
+
 	};
 }
