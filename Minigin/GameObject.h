@@ -1,6 +1,9 @@
 #pragma once
 #include <memory>
 #include <vector>
+#include <glm/vec3.hpp>
+
+
 
 
 namespace dae
@@ -8,14 +11,15 @@ namespace dae
 
 	class Texture2D;
 	class BaseComponent;
+	class TransformComponent;
 
 	class GameObject final
 	{
 	public:
-		 void Update(float deltaTime);
-		 void Render() const;
+		void Update(float deltaTime);
+		void Render() const;
 
-		
+
 
 		GameObject() = default;
 		~GameObject();
@@ -25,7 +29,7 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 
-		//Component managment
+		//Component management
 		void AddComponent(BaseComponent* component);
 
 		template <typename T>
@@ -40,7 +44,7 @@ namespace dae
 			m_Components.erase(it, m_Components.end());
 		}
 
-		
+
 		template <typename T>
 		bool HasComponent() const
 		{
@@ -62,8 +66,32 @@ namespace dae
 			return nullptr;
 		}
 
+		//SceneGraph
+		void SetParent(GameObject* parent, bool keepWorldPosition);
+
+
+		GameObject* GetChildAtIndex(int index) const { return m_Children[index]; }
+		size_t GetChildCount() const { return m_Children.size(); }
+
+		bool IsChild(const GameObject* parent);
+
+		const GameObject* GetParent() const { return m_Parent; }
+
 	private:
+
 		std::vector<BaseComponent*> m_Components;
+
+		std::vector<GameObject*> m_Children;
+		GameObject* m_Parent{ nullptr };
+
+		glm::vec3 m_LocalPosition;
+		glm::vec3 m_WorldPosition;
+
+		TransformComponent* m_Transform;
+
+
+		void RemoveChild(GameObject* child);
+		void AddChild(GameObject* child);
 
 	};
 }

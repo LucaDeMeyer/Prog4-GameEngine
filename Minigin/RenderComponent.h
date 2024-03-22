@@ -42,7 +42,7 @@ namespace dae
 		//---------------------------
 		void Update(float deltaTime) override;
 		void Render(const dae::Texture2D& texture, const dae::TransformComponent& transform) const;
-		std::string GetName() const override;
+		
 	private:
 		// -------------------------
 		// Datamembers

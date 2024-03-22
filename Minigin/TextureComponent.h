@@ -42,7 +42,7 @@ namespace dae
 		// General Methods
 		//---------------------------
 		void Update(float deltaTime) override;
-		std::string GetName() const override;
+		
 		dae::Texture2D& GetTexture() const;
 		void SetTexture(std::shared_ptr<Texture2D> newTexture);
 		void LoadTexture(const std::string& filename);

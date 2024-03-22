@@ -7,13 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ad8dfc76-8f91-4749-8e5f-b002159a3c7b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Minigin/BaseComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/BaseComponent.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/GameObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/GameObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/GameObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/GameObject.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/TextObject.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/TextObject.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Minigin/TextObject.h" beforeDir="false" afterPath="$PROJECT_DIR$/Minigin/TextObject.h" afterDir="false" />
-    </list>
+    <list default="true" id="ad8dfc76-8f91-4749-8e5f-b002159a3c7b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +36,7 @@
     "C++ Project.Minigin.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Week1-Updating-GameObjects",
+    "git-widget-placeholder": "Week04__Commands",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -104,6 +98,17 @@
         <option name="PASS_PARENT_ENVS" value="1" />
         <option name="USE_EXTERNAL_CONSOLE" value="0" />
       </configuration_4>
+      <configuration_5>
+        <option name="CONFIGURATION" value="" />
+        <option name="PLATFORM" value="" />
+        <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/Minigin/Minigin.vcxproj" />
+        <option name="CURRENT_LAUNCH_PROFILE" value="Local" />
+        <option name="EXE_PATH" value="$(TargetPath)" />
+        <option name="PROGRAM_PARAMETERS" value="" />
+        <option name="WORKING_DIRECTORY" value="$(ProjectDir)" />
+        <option name="PASS_PARENT_ENVS" value="1" />
+        <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      </configuration_5>
       <option name="DEFAULT_PROJECT_PATH" value="$PROJECT_DIR$/Minigin/Minigin.vcxproj" />
       <method v="2">
         <option name="Build" />
@@ -120,6 +125,7 @@
       <updated>1708785022984</updated>
       <workItem from="1708785027380" duration="60000" />
       <workItem from="1708785122088" duration="767000" />
+      <workItem from="1710939910064" duration="52000" />
     </task>
     <servers />
   </component>

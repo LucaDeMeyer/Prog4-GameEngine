@@ -45,10 +45,5 @@ void dae::TextComponent::SetText(const std::string& text)
 	m_needsUpdate = true;
 }
 
-std::string dae::TextComponent::GetName() const
-{
-	return "TextComponent";
-}
-
 
 

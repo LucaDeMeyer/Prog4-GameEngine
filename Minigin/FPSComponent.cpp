@@ -38,8 +38,3 @@ void dae::FPSComponent::Update(float deltaTime) {
     }
 }
 
-std::string dae::FPSComponent::GetName() const
-{
-    return "FPSComponent";
-}
-
